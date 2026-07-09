@@ -18,6 +18,20 @@
     url("./fonts/thelasttrunks.ttf") format("truetype");
 }
 
+@font-face {
+  font-family: "scribbles";
+  src:
+    local("OverScribble"),
+    url("./fonts/overscrible.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "besties";
+  src:
+    local("Estie Bestie"),
+    url("./fonts/estiebestie.ttf") format("truetype");
+}
+
 /* Full screen */
 
 .big-container {
@@ -115,26 +129,11 @@
   width: 620px;
   padding: 10px;
 
-  border: 1px soli1d rgba(255, 255, 255, 0.45);
+  border: 1px solid rgba(255, 255, 255, 0.45);
   border-radius: 15px;
 
   background-color: rgba(175, 238, 238, 0.1);
-  background-image:
-    repeating-linear-gradient(
-      90deg transparent 0px,
-      transparent 6px,
-      rgba(255, 255, 255, 0.7) 7px,
-      rgba(255, 255, 255, 0.7) 9px,
-      transparent 10px,
-      transparent 100%
-    ),
-    linear-gradient(
-      130deg,
-      rgba(0, 255, 255, 0.3),
-      rgba(255, 255, 255, 0.7),
-      rgba(0, 255, 255, 0.3)
-    );
-
+  background-image: linear-gradient(to bottom right, rgb(49, 49, 49), rgb(26, 26, 26));
   backdrop-filter: blur(50px);
 
   box-shadow:
@@ -155,12 +154,12 @@
   width: 600px;
   padding: 0 10px;
 
-  border: 2px solid rgba(59, 59, 59, 0.5);
+  border: 2px solid rgb(59, 59, 59);
   border-radius: 15px;
   overflow: hidden;
 
   backdrop-filter: blur(25px);
-  background-color: rgba(134, 134, 134, 0.5);
+  background-color: rgba(0, 0, 0, 0.5);
   box-shadow:
     inset 5px 5px 10px rgba(134, 134, 134, 0.5),
     inset -5px -5px 10px rgba(134, 134, 134, 0.5),
@@ -184,22 +183,7 @@ button {
   border: 1px solid rgba(255, 255, 255, 0.45);
 
   background-color: rgba(175, 238, 238, 0.1);
-  background-image:
-    repeating-linear-gradient(
-      90deg transparent 0px,
-      transparent 6px,
-      rgba(255, 255, 255, 0.7) 7px,
-      rgba(255, 255, 255, 0.7) 9px,
-      transparent 10px,
-      transparent 100%
-    ),
-    linear-gradient(
-      130deg,
-      rgba(0, 255, 255, 0.3),
-      rgba(255, 255, 255, 0.7),
-      rgba(0, 255, 255, 0.3)
-    );
-
+  background-image: linear-gradient(to bottom right, rgb(49, 49, 49), rgb(26, 26, 26));
   box-shadow:
     inset 20px 20px 50px rgba(255, 255, 255, 0.65),
     inset 2px 2px 3px rgb(255, 255, 255),
@@ -339,12 +323,11 @@ h1 {
   flex: 1;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
-
+  align-items: flex-start;
   z-index: 1;
 
   margin: 25px 25px 15px 5px;
-  padding: 71.5px 37.5px 42px 75px;
+  padding: 50px 37.5px 50px 75px;
 
   background-color: rgb(253, 242, 227);
   background-image:
@@ -393,7 +376,6 @@ h1 {
 
 .binding-point {
   position: relative;
-  justify-content: center;
 }
 
 .ring {
@@ -418,7 +400,6 @@ h1 {
 }
 
 .hole {
-  display: flex;
   position: relative;
   z-index: 2;
 
@@ -436,10 +417,48 @@ h1 {
   );
 }
 
+
 .text-container p {
   overflow-wrap: break-word;
-  flex: 1;
 
-  font-size: 20px;
   line-height: 21.5px;
+  font-size: 11px;
+  text-align: center;
+}
+
+h2 {
+  font-family: scribbles;
+  font-size: 50px;
+  font-weight: 100;
+  text-align: center;
+  color: red;
+
+  transform: scale(1.6);
+  transform-origin: 0%;
+}
+
+.codeword {
+  display: flex;
+  align-items: center;
+    gap: 10px;
+
+
+}
+.letter {
+  font-family: scribbles;
+  font-size: 30px;
+  color: blue;
+
+  text-align: center;
+  transform: scale(2);
+  transform-origin: center;
+}
+
+.word {
+  display: flex;
+  flex-shrink: 1;
+
+  font-family: besties;
+  font-size: 30px;
+  font-weight: 300;
 }
