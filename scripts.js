@@ -1,10 +1,15 @@
-// GLobal Variables // 
+// Global Variables //
 
 let firstNumber = 0;
 let currentOperator = "";
 let resetScreen = false;
 let secondNumber = 0;
 
+// === Auxiliary === //
+
+function rounded(x) {
+  return Math.round(x * 100000) / 100000;
+}
 // Basic Math Functions //
 
 function add(a, b) {
@@ -34,108 +39,175 @@ function operate(num1, operator, num2) {
   }
 }
 
-// Nummbers //
+// Numbers //
 
-let screen = document.querySelector("#screen");
-let numButtons = document.querySelectorAll(".number");
+const screen = document.querySelector("#screen");
 
+const numButtons = document.querySelectorAll(".number");
 numButtons.forEach((number) => {
   number.addEventListener("click", () => {
-    if (screen.textContent === "0" || resetScreen) {
-      screen.textContent = number.textContent;
-      resetScreen = false;
-    } else {
-      screen.textContent += number.textContent;
-    }
+    numberInput(number.textContent);
   });
 });
+
+function numberInput(number) {
+  if (screen.textContent === "0" || resetScreen) {
+    screen.textContent = number;
+    resetScreen = false;
+  } else if (screen.textContent.length >= 18) {
+    return;
+  } else {
+    screen.textContent += number;
+  }
+}
 
 // Operators //
 
-let opsButtons = document.querySelectorAll(".operator");
+const opsButtons = document.querySelectorAll(".operator");
 opsButtons.forEach((operator) => {
   operator.addEventListener("click", () => {
-    if (operator.textContent === "+") {
-      newOperator = "+";
-    } else if (operator.textContent === "-") {
-      newOperator = "-";
-    } else if (operator.textContent === "÷") {
-      newOperator = "/";
-    } else if (operator.textContent === "×") {
-      newOperator = "*";
-    }
-    if (currentOperator !== "" && resetScreen === false) {
-      secondNumber = Number(screen.textContent);
-      let result = operate(firstNumber, currentOperator, secondNumber);
-      screen.textContent = rounded(result);
-      firstNumber = result;
-    } else {
-      firstNumber = Number(screen.textContent);
-    }
-    currentOperator = newOperator;
-    resetScreen = true;
+    operatorInput(operator.textContent);
   });
 });
 
+function operatorInput(operator) {
+  let newOperator = "";
+  if (operator === "+") {
+    newOperator = "+";
+  } else if (operator === "-") {
+    newOperator = "-";
+  } else if (operator === "÷" || operator === "/") {
+    newOperator = "/";
+  } else if (operator === "×" || operator === "*" || operator === "x") {
+    newOperator = "*";
+  }
+  if (currentOperator !== "" && resetScreen === false) {
+    secondNumber = Number(screen.textContent);
+    if (currentOperator === "/" && secondNumber === 0) {
+      screen.textContent = "Nuh-uh, Nice Try!";
+      firstNumber = 0;
+      secondNumber = 0;
+      currentOperator = "";
+      resetScreen = true;
+      return;
+    }
+    let result = operate(firstNumber, currentOperator, secondNumber);
+    screen.textContent = rounded(result);
+    firstNumber = rounded(result);
+  } else {
+    firstNumber = Number(screen.textContent);
+  }
+  currentOperator = newOperator;
+  resetScreen = true;
+}
+
 // Equals Button //
 
-let equalsButton = document.querySelector("#equals-button");
+const equalsButton = document.querySelector("#equals-button");
 equalsButton.addEventListener("click", () => {
+  equalsInput();
+});
+
+function equalsInput() {
   if (currentOperator === "" || resetScreen) {
     return;
   }
   secondNumber = Number(screen.textContent);
   if (currentOperator === "/" && secondNumber === 0) {
     screen.textContent = "Nuh-uh, Nice Try!";
-    resetScreen = true
+    firstNumber = 0;
+    secondNumber = 0;
+    currentOperator = "";
+    resetScreen = true;
     return;
   }
-  let result = operate(firstNumber, currentOperator, secondNumber);
+  const result = operate(firstNumber, currentOperator, secondNumber);
   screen.textContent = rounded(result);
   resetScreen = true;
-  return
-});
+  firstNumber = 0;
+  secondNumber = 0;
+  currentOperator = "";
+}
 
 // Clear Function //
 
-let clearButton = document.querySelector("#clear-button");
+const clearButton = document.querySelector("#clear-button");
 clearButton.addEventListener("click", () => {
+  clearInput();
+});
+
+function clearInput() {
   firstNumber = 0;
   secondNumber = 0;
   currentOperator = "";
   resetScreen = false;
   screen.textContent = "0";
-});
+}
 
 // Decimal Function //
 
-let decimal = document.querySelector(".decimal")
+const decimal = document.querySelector(".decimal");
 decimal.addEventListener("click", () => {
-    if (resetScreen === true) {
-        screen.textContent = "0.";
-        resetScreen = false;
-    } else if (screen.textContent.includes(".")) {
-        return
-    } else {
-        screen.textContent += "."
-    }    
-    })
+  decimalInput();
+});
+
+function decimalInput() {
+  if (resetScreen === true) {
+    screen.textContent = "0.";
+    resetScreen = false;
+  } else if (screen.textContent.includes(".")) {
+    return;
+  } else if (screen.textContent.length >= 18) {
+    return;
+  } else {
+    screen.textContent += ".";
+  }
+}
 
 // Backspace Function //
 
-let backspace = document.querySelector(".back");
+const backspace = document.querySelector(".back");
 backspace.addEventListener("click", () => {
-   if (resetScreen) {
-    return
-   } else if (screen.textContent.length === 1) {
-    screen.textContent = "0"   
-   } else {
+  backInput();
+});
+
+function backInput() {
+  if (resetScreen) {
+    return;
+  } else if (screen.textContent.length === 1) {
+    screen.textContent = "0";
+  } else {
     screen.textContent = screen.textContent.slice(0, -1);
-   }
-})
-
-// Auxiliary //
-
-function rounded(x) {
-    return Math.round(x * 10) / 10
+  }
 }
+
+// Keyboard Support //
+
+const numberKeys = "0123456789";
+const operatorKeys = "-+*/";
+const equalsKeys = ["Enter", "="];
+const clearKeys = ["Escape", "Delete"];
+const backKeys = ["Backspace"];
+const decimalKeys = ["."];
+
+document.addEventListener("keydown", (event) => {
+  if (numberKeys.includes(event.key)) {
+    event.preventDefault();
+    numberInput(event.key);
+  } else if (operatorKeys.includes(event.key)) {
+    event.preventDefault();
+    operatorInput(event.key);
+  } else if (equalsKeys.includes(event.key)) {
+    event.preventDefault();
+    equalsInput();
+  } else if (clearKeys.includes(event.key)) {
+    event.preventDefault();
+    clearInput();
+  } else if (backKeys.includes(event.key)) {
+    event.preventDefault();
+    backInput();
+  } else if (decimalKeys.includes(event.key)) {
+    event.preventDefault();
+    decimalInput();
+  }
+});
