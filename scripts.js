@@ -7,6 +7,7 @@ let secondNumber = 0;
 
 // === Auxiliary === //
 
+
 function rounded(x) {
   return Math.round(x * 100000) / 100000;
 }
@@ -91,7 +92,7 @@ function operatorInput(operator) {
       resetScreen = true;
       return;
     }
-    let result = operate(firstNumber, currentOperator, secondNumber);
+    const result = operate(firstNumber, currentOperator, secondNumber);
     screen.textContent = rounded(result);
     firstNumber = rounded(result);
   } else {
