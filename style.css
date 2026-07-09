@@ -107,7 +107,6 @@
   padding: 10px;
   display: flex;
   flex-direction: column;
-  background-color: aquamarine;
 }
 /* == Screen == */
 
@@ -115,19 +114,37 @@
   height: 71.25px;
   width: 600px;
   border-radius: 5px;
+
   display: flex;
-  justify-content: center;
   align-items: center;
-  background-color: cadetblue;
+  justify-content: flex-end;
+
+  padding: 0 10px;
+
+  background-color: rgb(134, 134, 134);
+  overflow: hidden;
 }
 
 .screen p {
-  text-align: right;
-  font-size: 30px;
+  transform: translateY(-10px);
+
+  line-height: 1;
+  font-size: 71.25px;
   font-family: "digital7";
 }
 
 /* == Buttons == */
+
+button {
+  border-radius: 5px;
+  border: 1px solid white;
+  background-image: linear-gradient(
+    to top right,
+    rgba(175, 238, 238, 0.4),
+    rgba(255, 255, 255, 0.4),
+    rgba(175, 238, 238, 0.4)
+  );
+}
 
 .button-container {
   padding-bottom: 10px;
@@ -137,7 +154,6 @@
   gap: 10px;
   display: flex;
   flex-direction: column;
-  background-color: chartreuse;
 }
 
 /* ====== Clear & Equals Buttons ====== */
@@ -153,6 +169,8 @@
 #equals-button {
   width: 600px;
   height: 79.82px;
+  font-size: 30px;
+  color: cyan;
 }
 
 /* ====== Numbers & Operators ====== */
@@ -178,21 +196,26 @@
 }
 
 .operators button {
-font-family: "digital7";
+  color: cyan;
+  font-family: "digital7";
   display: flex;
   width: 73.75px;
   height: 79.826px;
   text-align: center;
   justify-content: center;
   align-items: center;
-  font-size: 50px;
+  font-size: 30px;
 }
 
 .numbers button {
+  color: cyan;
   font-family: "digital7";
   display: flex;
   width: 165.41px;
   height: 79.826px;
+  justify-content: center;
+  align-items: center;
+  font-size: 30px;
 }
 
 /* Info */
@@ -222,6 +245,8 @@ h1 {
     2px 2px 0 rgba(190, 140, 85, 0.18);
 }
 
+/* Book */
+
 .notebook {
   display: flex;
   flex-direction: column;
@@ -235,13 +260,12 @@ h1 {
     rgb(82, 82, 82)
   );
 
-  box-shadow:2px 2px 5px black;
+  box-shadow: 2px 2px 5px black;
 }
 
-
 .text-container {
-    position: relative;
-    z-index: 1;
+  position: relative;
+  z-index: 1;
   display: flex;
   flex: 1;
   flex-direction: column;
@@ -287,47 +311,48 @@ h1 {
 }
 
 .rings {
-    position: absolute;
-    top: -50px;
-    right: 90px;
-    padding:10px;
-    gap: 10px;
-    display: flex;
-
+  position: absolute;
+  top: -50px;
+  right: 90px;
+  padding: 10px;
+  gap: 10px;
+  display: flex;
 }
 
 .binding-point {
-    position: relative;
-    justify-content: center;
-
+  position: relative;
+  justify-content: center;
 }
 
 .ring {
-    position: relative;
-    top: 22px;
-    z-index: 10;
-    border-top: 15px solid #6f6f6f;
-    border-left: 15px solid #c0c0c0;
-    border-bottom: 0px;
-    border-right: 0px;
-    border-radius: 50px;
-    width: 50px;
-    height:80px;
-    rotate: 4deg;
+  position: relative;
+  top: 22px;
+  z-index: 10;
+  border-top: 15px ridge #c0c0c0;
+  border-left: 15px ridge #c0c0c0;
+  border-bottom: 0px;
+  border-right: 0px;
+  border-radius: 50px;
+  width: 50px;
+  height: 80px;
+  rotate: 7deg;
 
-    box-shadow: inset 5px 5px 5px #2f2f2f,
-    inset -4px 4px 4px #eeeeee;
+  box-shadow:
+    inset 5px 5px 5px #2f2f2f,
+    inset 2px 2px #2f2f2f,
+    -3px -3px 2px #2f2f2f;
 }
 
-
 .hole {
-    position: relative;
-    z-index: 2;
-    display: flex;
-    background-image: radial-gradient(ellipse at 85% 85%,rgb(180, 180, 180) 0%,
-      rgb(126, 126, 126) 35%,
-      rgb(37, 37, 37) 40%);
-
+  position: relative;
+  z-index: 2;
+  display: flex;
+  background-image: radial-gradient(
+    ellipse at 85% 85%,
+    rgb(180, 180, 180) 0%,
+    rgb(126, 126, 126) 35%,
+    rgb(37, 37, 37) 40%
+  );
 
   border: 2px solid black;
   border-radius: 50px;
